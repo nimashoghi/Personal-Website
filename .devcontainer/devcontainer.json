@@ -1,0 +1,15 @@
+{
+    "name": "Gatsby",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "development",
+    "workspaceFolder": "/workspace",
+    "extensions": [
+        "dbaeumer.vscode-eslint",
+        "visualstudioexptteam.vscodeintellicode",
+        "esbenp.prettier-vscode",
+        "wallabyjs.quokka-vscode",
+        "wallabyjs.wallaby-vscode"
+    ],
+    "postCreateCommand": "yarn",
+    "shutdownAction": "stopCompose"
+}
