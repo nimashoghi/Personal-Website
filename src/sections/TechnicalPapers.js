@@ -39,6 +39,9 @@ const Background = () => (
     </div>
 )
 
+const fallbackLogo =
+    "https://images.vexels.com/media/users/3/140954/isolated/preview/92c8d4fffeec447a9106b65f8bbf0226-pen-paper-round-icon-by-vexels.png"
+
 const Projects = () => {
     const {
         contentfulAbout: {technicalPapers},
@@ -49,16 +52,8 @@ const Projects = () => {
                     id
                     name
                     description
-                    projectUrl
-                    repositoryUrl
+                    url
                     publishedDate(formatString: "YYYY")
-                    type
-                    logo {
-                        title
-                        image: resize(width: 200, quality: 100) {
-                            src
-                        }
-                    }
                 }
             }
         }
@@ -74,7 +69,7 @@ const Projects = () => {
             <CardContainer minWidth="350px">
                 {technicalPapers.map((p, i) => (
                     <Fade bottom delay={i * 200} key={p.id}>
-                        <Project {...p} />
+                        <Project fallbackLogo={fallbackLogo} {...p} />
                     </Fade>
                 ))}
             </CardContainer>

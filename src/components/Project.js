@@ -23,21 +23,19 @@ const TextContainer = styled.div`
     display: flex;
     flex-direction: column;
     padding: 10px;
-    width: ${props =>
-        props.hasImage ? `calc(100% - ${CARD_HEIGHT})` : "100%"};
+    width: calc(100% - ${CARD_HEIGHT});
 
     ${MEDIA_QUERY_SMALL} {
-        width: ${props =>
-            props.hasImage ? `calc(100% - ${CARD_HEIGHT / 2})` : "100%"};
+        width: calc(100% - ${CARD_HEIGHT / 2});
     }
 `
 
 const ImageContainer = styled.div`
     margin: auto;
-    width: ${CARD_HEIGHT};
+    width: calc(100% - ${CARD_HEIGHT});
 
     ${MEDIA_QUERY_SMALL} {
-        width: calc(${CARD_HEIGHT} / 2);
+        width: calc(100% - ${CARD_HEIGHT / 2});
     }
 `
 
@@ -66,32 +64,39 @@ const ProjectTag = styled.div`
         top: calc(-${CARD_HEIGHT} - 3.5px + (${CARD_HEIGHT} / 4));
     }
 `
+const fallbackImageSrc =
+    "https://freeiconshop.com/wp-content/uploads/edd/code-flat.png"
 
 const Project = ({
     name,
     description,
-    projectUrl,
-    repositoryUrl,
+    url,
     type,
     publishedDate,
     logo,
-}) => (
-    <Card p={0}>
-        <Flex style={{height: CARD_HEIGHT}}>
-            <TextContainer hasImage={!!logo}>
-                <span>
-                    <Title my={2} pb={1}>
-                        {name}
-                    </Title>
-                </span>
-                <Text width={[1]} style={{overflow: "auto"}}>
-                    {description}
-                </Text>
-            </TextContainer>
-
-            {logo && (
+    fallbackLogo = fallbackImageSrc,
+}) => {
+    const {image, title} = logo || {
+        image: {
+            src: fallbackLogo,
+        },
+        title: name,
+    }
+    return (
+        <Card p={0}>
+            <Flex style={{height: CARD_HEIGHT}}>
+                <TextContainer>
+                    <span>
+                        <Title my={2} pb={1}>
+                            {name}
+                        </Title>
+                    </span>
+                    <Text width={[1]} style={{overflow: "auto"}}>
+                        {description}
+                    </Text>
+                </TextContainer>
                 <ImageContainer>
-                    <ProjectImage src={logo.image.src} alt={logo.title} />
+                    <ProjectImage src={image.src} alt={title} />
                     <ProjectTag>
                         <Flex
                             style={{
@@ -101,14 +106,7 @@ const Project = ({
                                 <SocialLink
                                     name="Check repository"
                                     fontAwesomeIcon="github"
-                                    url={repositoryUrl}
-                                />
-                            </Box>
-                            <Box mx={1} fontSize={5}>
-                                <SocialLink
-                                    name="See project"
-                                    fontAwesomeIcon="globe"
-                                    url={projectUrl}
+                                    url={url}
                                 />
                             </Box>
                         </Flex>
@@ -118,7 +116,7 @@ const Project = ({
                             y="bottom"
                             x="right"
                             round>
-                            {type}
+                            {type || ""}
                         </ImageSubtitle>
                         <Hide query={MEDIA_QUERY_SMALL}>
                             <ImageSubtitle bg="backgroundDark">
@@ -127,17 +125,16 @@ const Project = ({
                         </Hide>
                     </ProjectTag>
                 </ImageContainer>
-            )}
-        </Flex>
-    </Card>
-)
+            </Flex>
+        </Card>
+    )
+}
 
 Project.propTypes = {
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    projectUrl: PropTypes.string.isRequired,
-    repositoryUrl: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+    type: PropTypes.string,
     publishedDate: PropTypes.string.isRequired,
     logo: PropTypes.shape({
         image: PropTypes.shape({
@@ -145,6 +142,33 @@ Project.propTypes = {
         }),
         title: PropTypes.string,
     }),
+    fallbackLogo: PropTypes.string,
 }
 
 export default Project
+
+/*
+TODO: Get projects from GitHub
+{
+  viewer {
+    repositories(first: 100, ownerAffiliations: OWNER, privacy: PUBLIC) {
+      edges {
+        node {
+          name
+          description
+          url
+          languages(first: 100) {
+            edges {
+              node {
+                name
+                color
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+*/

@@ -2,7 +2,12 @@ const contentful = require("contentful")
 const manifestConfig = require("./manifest-config")
 require("dotenv").config()
 
-const {ACCESS_TOKEN, SPACE_ID, ANALYTICS_ID} = process.env
+const {
+    ACCESS_TOKEN,
+    SPACE_ID,
+    ANALYTICS_ID,
+    GITHUB_PERSONAL_ACCESS_TOKEN,
+} = process.env
 
 const client = contentful.createClient({
     space: SPACE_ID,
@@ -12,6 +17,19 @@ const client = contentful.createClient({
 const getAboutEntry = entry => entry.sys.contentType.sys.id === "about"
 
 const plugins = [
+    {
+        resolve: "gatsby-source-graphql",
+        options: {
+            typeName: "GitHub",
+            fieldName: "github",
+            url: "https://api.github.com/graphql",
+            headers: {
+                Authorization: `Bearer ${GITHUB_PERSONAL_ACCESS_TOKEN}`,
+            },
+            fetchOptions: {},
+        },
+    },
+
     "gatsby-plugin-react-helmet",
     {
         resolve: "gatsby-plugin-web-font-loader",
