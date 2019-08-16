@@ -1,5 +1,7 @@
+import getUrls from "get-urls"
 import PropTypes from "prop-types"
 import React from "react"
+import ReactMarkdown from "react-markdown"
 import {Box, Flex, Image, Text} from "rebass"
 import styled from "styled-components"
 import {Card} from "./Card"
@@ -32,10 +34,10 @@ const TextContainer = styled.div`
 
 const ImageContainer = styled.div`
     margin: auto;
-    width: calc(100% - ${CARD_HEIGHT});
+    width: ${CARD_HEIGHT};
 
     ${MEDIA_QUERY_SMALL} {
-        width: calc(100% - ${CARD_HEIGHT / 2});
+        width: calc(${CARD_HEIGHT} / 2);
     }
 `
 
@@ -70,11 +72,16 @@ const fallbackImageSrc =
 const Project = ({
     name,
     description,
+    descriptionMarkdown,
     url,
+    projectUrl,
+    projectUrlTooltip,
     type,
+    typeColor,
     publishedDate,
     logo,
     fallbackLogo = fallbackImageSrc,
+    stars,
 }) => {
     const {image, title} = logo || {
         image: {
@@ -82,6 +89,13 @@ const Project = ({
         },
         title: name,
     }
+    const isGithub = stars !== undefined && url.includes("github.com")
+    let projectUrl_ = projectUrl
+    if (!projectUrl) {
+        const urls = [...getUrls(description || "").values()]
+        projectUrl_ = urls.length === 0 ? undefined : urls[0]
+    }
+
     return (
         <Card p={0}>
             <Flex style={{height: CARD_HEIGHT}}>
@@ -89,10 +103,17 @@ const Project = ({
                     <span>
                         <Title my={2} pb={1}>
                             {name}
+                            {stars === undefined ? "" : ` (${stars})`}
                         </Title>
                     </span>
                     <Text width={[1]} style={{overflow: "auto"}}>
-                        {description}
+                        {description || (
+                            <ReactMarkdown
+                                source={descriptionMarkdown}
+                                disallowedTypes={["paragraph"]}
+                                unwrapDisallowed
+                            />
+                        )}
                     </Text>
                 </TextContainer>
                 <ImageContainer>
@@ -102,24 +123,47 @@ const Project = ({
                             style={{
                                 float: "right",
                             }}>
+                            {projectUrl_ && (
+                                <Box mx={1} fontSize={5}>
+                                    <SocialLink
+                                        name={
+                                            projectUrlTooltip ||
+                                            "See project homepage"
+                                        }
+                                        fontAwesomeIcon="globe"
+                                        url={projectUrl_}
+                                    />
+                                </Box>
+                            )}
                             <Box mx={1} fontSize={5}>
                                 <SocialLink
-                                    name="Check repository"
-                                    fontAwesomeIcon="github"
+                                    name={
+                                        isGithub
+                                            ? "Check repository"
+                                            : "See project"
+                                    }
+                                    fontAwesomeIcon={
+                                        isGithub ? "github" : "globe"
+                                    }
+                                    badge={
+                                        stars === undefined
+                                            ? undefined
+                                            : `${stars}`
+                                    }
                                     url={url}
                                 />
                             </Box>
                         </Flex>
                         <ImageSubtitle
-                            bg="primary"
-                            color="white"
+                            bg="backgroundDark"
+                            color={typeColor || "#ffffff"}
                             y="bottom"
                             x="right"
                             round>
                             {type || ""}
                         </ImageSubtitle>
                         <Hide query={MEDIA_QUERY_SMALL}>
-                            <ImageSubtitle bg="backgroundDark">
+                            <ImageSubtitle bg="backgroundDark" color="#ffffff">
                                 {publishedDate}
                             </ImageSubtitle>
                         </Hide>
@@ -132,9 +176,13 @@ const Project = ({
 
 Project.propTypes = {
     name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    descriptionMarkdown: PropTypes.string,
     url: PropTypes.string.isRequired,
+    projectUrl: PropTypes.string,
+    projectUrlTooltip: PropTypes.string,
     type: PropTypes.string,
+    typeColor: PropTypes.string,
     publishedDate: PropTypes.string.isRequired,
     logo: PropTypes.shape({
         image: PropTypes.shape({
@@ -143,32 +191,7 @@ Project.propTypes = {
         title: PropTypes.string,
     }),
     fallbackLogo: PropTypes.string,
+    stars: PropTypes.number,
 }
 
 export default Project
-
-/*
-TODO: Get projects from GitHub
-{
-  viewer {
-    repositories(first: 100, ownerAffiliations: OWNER, privacy: PUBLIC) {
-      edges {
-        node {
-          name
-          description
-          url
-          languages(first: 100) {
-            edges {
-              node {
-                name
-                color
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-*/

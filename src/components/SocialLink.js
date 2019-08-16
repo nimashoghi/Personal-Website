@@ -1,9 +1,9 @@
-import React from "react"
-import {Link} from "rebass"
-import {Tooltip} from "react-tippy"
-import styled from "styled-components"
 import PropTypes from "prop-types"
+import React from "react"
 import FontAwesomeIcon from "react-fontawesome"
+import {Tooltip} from "react-tippy"
+import {Link} from "rebass"
+import styled from "styled-components"
 
 const IconLink = styled(Link)`
     transition: color 0.5s;
@@ -16,7 +16,23 @@ const IconLink = styled(Link)`
     }
 `
 
-const SocialLink = ({fontAwesomeIcon, name, url, color}) => (
+const Badge = styled.span`
+    text-align: center;
+    border-radius: 50rem;
+    background: red;
+    color: white;
+    font-size: 1rem;
+
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+
+    position: relative;
+    bottom: 40%;
+    right: 25%;
+`
+
+const SocialLink = ({fontAwesomeIcon, name, url, color, badge}) => (
     <Tooltip title={name} position="bottom" trigger="mouseenter">
         <IconLink
             href={url}
@@ -25,6 +41,7 @@ const SocialLink = ({fontAwesomeIcon, name, url, color}) => (
             rel="noreferrer"
             aria-label={name}>
             <FontAwesomeIcon name={fontAwesomeIcon} />
+            {badge && <Badge>{badge}</Badge>}
         </IconLink>
     </Tooltip>
 )
@@ -34,6 +51,7 @@ SocialLink.propTypes = {
     name: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
     color: PropTypes.string,
+    badge: PropTypes.string,
 }
 
 export default SocialLink

@@ -1,6 +1,7 @@
-import styled from "styled-components"
-import {Box} from "rebass"
+import invert from "invert-color"
 import PropTypes from "prop-types"
+import {Box} from "rebass"
+import styled from "styled-components"
 
 const BORDER_SPACING = "20px"
 const BORDER_RADIUS = "8px"
@@ -26,16 +27,17 @@ const ImageSubtitle = styled(Box)`
   font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;
+  text-shadow: 0px 0px 3px ${props => invert(props.color || "#ffffff")};
 
   ${props => props.x}: 0;
   ${props => props.y}: 0;
-  
+
   ${props =>
       props.x === "left"
           ? `padding-right: ${BORDER_SPACING};`
           : `padding-left: ${BORDER_SPACING};`}
   clip-path: ${props => BORDER_PATH_MAP[`${props.y}-${props.x}`]};
-  
+
   ${props =>
       props.round &&
       `border-radius: ${BORDER_RADIUS_MAP[`${props.y}-${props.x}`]};`}

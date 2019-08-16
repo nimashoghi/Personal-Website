@@ -1,11 +1,11 @@
+import {graphql, StaticQuery} from "gatsby"
 import React, {Fragment} from "react"
-import {StaticQuery, graphql} from "gatsby"
-import {Heading, Flex, Box, Text} from "rebass"
-import TextLoop from "react-text-loop"
 import {SectionLink} from "react-scroll-section"
+import TextLoop from "react-text-loop"
+import {Box, Flex, Heading, Text} from "rebass"
+import MouseIcon from "../components/MouseIcon"
 import Section from "../components/Section"
 import SocialLink from "../components/SocialLink"
-import MouseIcon from "../components/MouseIcon"
 import Triangle from "../components/Triangle"
 
 const Background = () => (
@@ -48,6 +48,7 @@ const LandingPage = () => (
                 query SiteTitleQuery {
                     contentfulAbout {
                         name
+                        description
                         roles
                         socialLinks {
                             id
@@ -59,7 +60,12 @@ const LandingPage = () => (
                 }
             `}
             render={data => {
-                const {name, socialLinks, roles} = data.contentfulAbout
+                const {
+                    name,
+                    description,
+                    socialLinks,
+                    roles,
+                } = data.contentfulAbout
 
                 return (
                     <Fragment>
@@ -67,9 +73,17 @@ const LandingPage = () => (
                             textAlign="center"
                             as="h2"
                             color="primary"
-                            fontSize={[5, 6, 8]}
-                            mb={[3, 4, 5]}>
+                            fontSize={[5, 6, 8]}>
                             {`Hello, I'm ${name}!`}
+                        </Heading>
+
+                        <Heading
+                            textAlign="center"
+                            as="h3"
+                            color="primaryLight"
+                            fontSize={[3, 4, 5]}
+                            mb={[3, 4, 5]}>
+                            {description}
                         </Heading>
 
                         <Heading

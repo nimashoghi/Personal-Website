@@ -1,8 +1,8 @@
+import {graphql, StaticQuery} from "gatsby"
 import React from "react"
-import styled from "styled-components"
-import {StaticQuery, graphql} from "gatsby"
-import {Text, Box, Link, Flex} from "rebass"
 import Fade from "react-reveal/Fade"
+import {Box, Flex, Link, Text} from "rebass"
+import styled from "styled-components"
 import SocialLink from "./SocialLink"
 
 const FooterContainer = styled.footer`
@@ -48,7 +48,7 @@ const Footer = () => (
                     <FooterContainer>
                         <Fade left>
                             <TextFooter fontSize={[2, 3]}>
-                                <span>{`${name} Portfolio - Powered by `}</span>
+                                <span>{`${name}'s Portfolio - Powered by `}</span>
                                 <Link href="https://www.gatsbyjs.org/">
                                     Gatsby
                                 </Link>

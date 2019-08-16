@@ -43,21 +43,36 @@ const fallbackLogo =
     "https://images.vexels.com/media/users/3/140954/isolated/preview/92c8d4fffeec447a9106b65f8bbf0226-pen-paper-round-icon-by-vexels.png"
 
 const Projects = () => {
-    const {
-        contentfulAbout: {technicalPapers},
-    } = useStaticQuery(graphql`
+    const {contentfulAbout} = useStaticQuery(graphql`
         query TechnicalPapersQuery {
             contentfulAbout {
                 technicalPapers {
                     id
                     name
-                    description
+                    description {
+                        childMarkdownRemark {
+                            rawMarkdownBody
+                        }
+                    }
                     url
                     publishedDate(formatString: "YYYY")
+                    type
+                    typeColor
                 }
             }
         }
     `)
+    const technicalPapers = contentfulAbout.technicalPapers.map(
+        ({
+            description: {
+                childMarkdownRemark: {rawMarkdownBody},
+            },
+            ...paper
+        }) => ({
+            ...paper,
+            descriptionMarkdown: rawMarkdownBody,
+        }),
+    )
 
     return (
         <Section.Container id="technical-papers" Background={Background}>
