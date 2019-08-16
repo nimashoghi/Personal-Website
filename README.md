@@ -1,97 +1,244 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
+# Gatsby Starter: Mate
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/EmaSuriano/gatsby-starter-mate.svg)](https://greenkeeper.io/)
+[![Travis badge](https://api.travis-ci.org/EmaSuriano/gatsby-starter-mate.svg)](https://travis-ci.org/EmaSuriano/gatsby-starter-mate)
+[![eslint](https://img.shields.io/badge/eslint-enabled-green.svg)](https://eslint.org/)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![Maintainability](https://api.codeclimate.com/v1/badges/c8fc076b30bd493f0cfc/maintainability)](https://codeclimate.com/github/EmaSuriano/gatsby-starter-mate/maintainability)
+
+![Gatsby Starter Mate logo](./media/gatsby-starter-mate-logo.png)
+
+> A portfolio starter for Gatsby integrated with Contentful CMS.
+
+The target audience are developers 💻 and tech writers ✍️.
+
+### [Demo Website](https://gatsby-starter-mate.netlify.com/)
+
+## Why? 🤔
+
+In case you are looking for a quick setup portfolio or upgrade your current, you have to definitely try Mate!
+
+This starter is totally content based on [Contentful](https://contentful.com), which is a headless CMS where you can write the content for your page. In summary, Contentful is the Model when Gatsby with React is the View.
+
+At the same time, as this portfolio is written with Gatsby is extremely easy to add more than one source of data! For example, the demo comes with an integration of [Medium](https://medium.com) posts based on a user name ✌️
+
+## Features 🛠
+
+-   [Gatsby v2](https://www.gatsbyjs.org/)
+-   [Rebass 3.0 🎉](https://rebassjs.org/): styled component system
+-   [React Reveal](https://www.react-reveal.com/)
+-   Dynamic content from [Contentful](https://contentful.com)
+-   Offline support
+-   PWA ready
+-   SEO
+-   Responsive design
+-   Icons from [font-awesome](https://fontawesome.com/)
+-   [Netlify](https://www.netlify.com) Deployment Friendly
+-   Medium integration
+-   Social sharing (Twitter, Facebook, Google, LinkedIn)
+-   Developer tools:
+    -   `eslint`
+    -   `prettier`
+-   Google Analytics
+
+### Lighthouse Score 💯
+
+![Lighthouse Score](media/lighthouse-score.png)
+
+## How to start ▶️
+
+As this process needs more steps compared to other starters, I decided to made a tutorial video of how to set up your own instance of Mate. You can follow the video or jump directly to the written documentation.
+
 <p align="center">
-  <a href="https://www.gatsbyjs.org">
-    <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
+  <a href="https://www.youtube.com/watch?v=YviWsypJF9c">
+   <img src="https://media.giphy.com/media/LQp2DrNPPUPybUwVx9/giphy.gif" alt="Watch the tutorial"/>
   </a>
 </p>
-<h1 align="center">
-  Gatsby's hello-world starter
-</h1>
 
-Kick off your project with this hello-world boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+If you never used Gatsby before, I highly recommend you to [Set up your development environment](https://www.gatsbyjs.org/tutorial/part-zero/)!
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.org/docs/gatsby-starters/)._
+To copy and install this starter run this command:
 
-## 🚀 Quick start
+```bash
+$ gatsby new mate-portfolio https://github.com/EmaSuriano/gatsby-starter-mate
+```
 
-1.  **Create a Gatsby site.**
+At this point you have the repository download with all the dependencies installed, but if you try to start by running `yarn develop` you are going to received this message in the console:
 
-    Use the Gatsby CLI to create a new site, specifying the hello-world starter.
+```bash
+  TypeError: Expected parameter accessToken
+```
 
-    ```sh
-    # create a new Gatsby site using the hello-world starter
-    gatsby new my-hello-world-starter https://github.com/gatsbyjs/gatsby-starter-hello-world
-    ```
+This is because you didn't specify from which `Contentful` space the portfolio will take the information. So the next step is create an empty space in [Contentful](https://www.contentful.com/)!
 
-1.  **Start developing.**
+After the space is created, run the following command:
 
-    Navigate into your new site’s directory and start it up.
+```bash
+yarn setup
+```
 
-    ```sh
-    cd my-hello-world-starter/
-    gatsby develop
-    ```
+This CLI will request 3 values:
 
-1.  **Open the source code and start editing!**
+-   `Space ID`
+-   `Content Delivery API - access token`
+-   `Personal Access Token`
 
-    Your site is now running at `http://localhost:8000`!
+These 3 values are inside the Settings section --> API keys.
 
-    _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql)._
+After you provide them the CLI will automatically starts copying all the `Content models` and `Contents` from `mate-demo-contentful` to your space ✨
 
-    Open the `my-hello-world-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+If everything went smooth you should see something like this in your terminal:
 
-## 🧐 What's inside?
+```text
+Writing config file...
+Config file /Users/my-user/Git/test/mate-portfolio/.env written
+┌──────────────────────────────────────────────────┐
+│ The following entities are going to be imported: │
+├─────────────────────────────────┬────────────────┤
+│ Content Types                   │ 3              │
+├─────────────────────────────────┼────────────────┤
+│ Editor Interfaces               │ 3              │
+├─────────────────────────────────┼────────────────┤
+│ Entries                         │ 8              │
+├─────────────────────────────────┼────────────────┤
+│ Assets                          │ 6              │
+├─────────────────────────────────┼────────────────┤
+│ Locales                         │ 1              │
+├─────────────────────────────────┼────────────────┤
+│ Webhooks                        │ 0              │
+└─────────────────────────────────┴────────────────┘
+ ✔ Validating content-file
+ ✔ Initialize client (1s)
+ ✔ Checking if destination space already has any content and retrieving it (2s)
+ ✔ Apply transformations to source data (1s)
+ ✔ Push content to destination space
+   ✔ Connecting to space (1s)
+   ✔ Importing Locales (1s)
+   ✔ Importing Content Types (4s)
+   ✔ Publishing Content Types (3s)
+   ✔ Importing Editor Interfaces (3s)
+   ✔ Importing Assets (7s)
+   ✔ Publishing Assets (3s)
+   ✔ Archiving Assets (1s)
+   ✔ Importing Content Entries (1s)
+   ✔ Publishing Content Entries (5s)
+   ✔ Archiving Entries (1s)
+   ✔ Creating Web Hooks (0s)
+Finished importing all data
+```
 
-A quick look at the top-level files and directories you'll see in a Gatsby project.
+After this step we can finally run the project and see the result in http://localhost:8000/ 😃
 
-    .
-    ├── node_modules
-    ├── src
-    ├── .gitignore
-    ├── .prettierrc
-    ├── gatsby-browser.js
-    ├── gatsby-config.js
-    ├── gatsby-node.js
-    ├── gatsby-ssr.js
-    ├── LICENSE
-    ├── package-lock.json
-    ├── package.json
-    └── README.md
+```bash
+yarn start
+```
 
-1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
+## Screenshot and Design 🖼
 
-2.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
+As the starter is a SPA it only has two routes:
 
-3.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
+-   `/`: main page with the sections of `Home`, `About me`, `Projects` and `Writing`.
+-   `/404`: error page for unexpected route.
 
-4.  **`.prettierrc`**: This is a configuration file for [Prettier](https://prettier.io/). Prettier is a tool to help keep the formatting of your code consistent.
+| Section  |           Screenshot            |
+| -------- | :-----------------------------: |
+| Home     |     ![Home](media/home.png)     |
+| About me |  ![About me](media/about.png)   |
+| Projects | ![Projects](media/projects.png) |
+| Writing  |  ![Writing](media/writing.png)  |
+| /404     |      ![404](media/404.png)      |
 
-5.  **`gatsby-browser.js`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.org/docs/browser-apis/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
+## Building your site 📦
 
-6.  **`gatsby-config.js`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.org/docs/gatsby-config/) for more detail).
+As we are dealing with environment variables, the `.env` file is excluded from `.gitignore` file. Therefore, in order to deploy the website you have to send `SPACE_ID` and `ACCESS_TOKEN` with the `build` command.
 
-7.  **`gatsby-node.js`**: This file is where Gatsby expects to find any usage of the [Gatsby Node APIs](https://www.gatsbyjs.org/docs/node-apis/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process.
+```bash
+SPACE_ID=xxxxx ACCESS_TOKEN=yyyyy yarn build
+```
 
-8.  **`gatsby-ssr.js`**: This file is where Gatsby expects to find any usage of the [Gatsby server-side rendering APIs](https://www.gatsbyjs.org/docs/ssr-apis/) (if any). These allow customization of default Gatsby settings affecting server-side rendering.
+The result will be stored inside the `public` folder, so you can upload to your web host. I highly suggest using this starter with Netlify when you can define which command will build the project and also send the environment variables inside the website configuration.
 
-9.  **`LICENSE`**: Gatsby is licensed under the MIT license.
+## Adding your information 📝
 
-10. **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(You won’t change this file directly).**
+All the text of this starter live inside Contentful, specifically inside the Content of `About`. In order to change it, just go to `Content` section and change the entity of About with the information you want.
 
-11. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
+![Contentful About change](./media/contentful-about-change.png)
 
-12. **`README.md`**: A text file containing useful reference information about your project.
+Regarding the projects and social links the process is the same! Contentful is really easy to learn so don't be afraid of breaking everything, remember that you can restore to the start point by running `yarn setup` 😄
 
-## 🎓 Learning Gatsby
+## Configuration (Optional) 👷‍♂️
 
-Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.org/). Here are some places to start:
+Mate starter is a SPA (Single Page Application), so basically you have only two pages:
 
--   **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.org/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
+-   `Main.js`: portfolio itself
+-   `404.js`: 404 error page with the same style
 
--   **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.org/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
+The structure for the main page is the following:
 
-## 💫 Deploy
+```javascript
+<Layout>
+    <Landing />
+    <About />
+    <Projects />
+    <Writing />
+</Layout>
+```
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-hello-world)
+`Layout` is the core of the application, it manages the theme for the application, the navigation between sections, also it defines the `header`.
 
-<!-- AUTO-GENERATED-CONTENT:END -->
+All the components inside `Layout` are `Section` components. A section can have a link inside the `Header` or not, in order to add you need to wrapped the exported `Section` with `withNavigation` HOC and it will be automatically registered (Context magic ✨).
+
+## Tracking with Google Analytics (Optional) 📈
+
+This starter has the analytics plugin inside the `gatsby-config`, so the only need to do in order to enable it is to provide the `Tracking Id` for your site (starts with `UA-`). Just set a new variable inside your `.env` file called `ANALYTICS_ID` and analytics will be turn on automatically 😄
+
+## Update your Starter (Optional) 💡
+
+In case you cloned this repository before and you want all the latest changes of it, you can execute the following command to update the code in your repository with the one in this repository:
+
+```bash
+# Add repository remote entry
+$ git remote add mate https://github.com/EmaSuriano/gatsby-starter-mate
+
+# Get changes from master branch of gatsby-starter-mate
+$ git pull mate master --allow-unrelated-histories
+
+# Reset changes in unnecessary folder/files
+$ git reset media/ bin/ README.md manifest-config.js
+
+# Remove files affected by the reset
+$ git checkout .
+
+# In this step you might need to fix a lot of conflicts, you can do fix manually or use just accept all the changes from mate
+$ git checkout --theirs .
+
+# WATCH OUT that some configuration can be overwritten in this last step, like package.json, colors, etc. I highly recommend to do an overall look up at the end of fixing the conflicts.
+
+# Install in case there is any new dependency added to the starter
+$ yarn
+
+# Build the project to see if everything is working as expected
+$ yarn build
+```
+
+## Deployment Automation (Optional) ⚙️
+
+Every time you made a change in your Contentful data or you add a new post in Medium you need to trigger a manual deployment, which can be an annoying task. Therefore I found a nice way to make this process automatic and it is by using a tool called Zapier.
+
+This tool will be watching for changes in Contentful and Medium and then trigger a new deploy in Netlify (or the service you are using). In summary, you don't need to care anymore about deploying your application and can focus on writing content or developing features!
+
+In case you want to know more I wrote an article in Medium that explains the whole process especially for this starter 🙌 [Click here to read it.](https://medium.com/@emasuriano/make-any-static-site-dynamic-without-coding-9dde5673b1a)
+
+**UPDATE:** Contentful added a feature to link it with Netlify as a built in option, but in case you are using another provider I recommend going with Zapier!
+
+## Contributing 💪
+
+I came with the idea of creating the starter after the positive feedback I received when I deployed [my website](https://emasuriano.com/). Therefore this starter is not perfect! I tried my best to remove all the personal information, also improve the code to make it easier to understand.
+
+I'm totally open for pull requests with bug fixes, changes in Documentation, or new features to the starter 🙌
+
+Please check the [Contribution guidelines](CONTRIBUTING.md) before opening yours 🙏
+
+## License 📝
+
+MIT.
