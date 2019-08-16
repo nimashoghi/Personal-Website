@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "gatsby clean && gatsby build",
+    "clean": "gatsby clean",
     "develop": "gatsby clean && gatsby develop --host 0.0.0.0",
     "start": "npm run develop",
     "serve": "gatsby serve",

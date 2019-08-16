@@ -41,11 +41,11 @@ const Background = () => (
 
 const Projects = () => {
     const {
-        contentfulAbout: {projects},
+        contentfulAbout: {technicalPapers},
     } = useStaticQuery(graphql`
-        query ProjectsQuery {
+        query TechnicalPapersQuery {
             contentfulAbout {
-                projects {
+                technicalPapers {
                     id
                     name
                     description
@@ -65,10 +65,14 @@ const Projects = () => {
     `)
 
     return (
-        <Section.Container id="projects" Background={Background}>
-            <Section.Header name="Projects" icon="💻" label="notebook" />
+        <Section.Container id="technical-papers" Background={Background}>
+            <Section.Header
+                name="Technical Papers"
+                icon="💻"
+                label="notebook"
+            />
             <CardContainer minWidth="350px">
-                {projects.map((p, i) => (
+                {technicalPapers.map((p, i) => (
                     <Fade bottom delay={i * 200} key={p.id}>
                         <Project {...p} />
                     </Fade>

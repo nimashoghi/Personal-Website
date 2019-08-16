@@ -1,13 +1,18 @@
 import React, {Fragment} from "react"
 import Headroom from "react-headroom"
+import Fade from "react-reveal/Fade"
+import {SectionLinks} from "react-scroll-section"
 import {Flex, Image} from "rebass"
 import styled from "styled-components"
-import {SectionLinks} from "react-scroll-section"
-import Fade from "react-reveal/Fade"
-import RouteLink from "./RouteLink"
 import Logo from "./Logo/Portfolio.svg"
+import RouteLink from "./RouteLink"
 
-const capitalize = s => s && s[0].toUpperCase() + s.slice(1)
+const capitalizeSingle = s => s && s[0].toUpperCase() + s.slice(1)
+const capitalize = s =>
+    s
+        .split("-")
+        .map(capitalizeSingle)
+        .join(" ")
 
 const HeaderContainer = styled(Headroom)`
     .headroom--pinned {
