@@ -48,7 +48,7 @@ const Footer = () => (
                     <FooterContainer>
                         <Fade left>
                             <TextFooter fontSize={[2, 3]}>
-                                <span>{`${name}'s Portfolio - Powered by `}</span>
+                                <span>{`${name}'s Portfolio — Powered by `}</span>
                                 <Link href="https://www.gatsbyjs.org/">
                                     Gatsby
                                 </Link>
