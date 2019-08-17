@@ -11,14 +11,14 @@ import Triangle from "../components/Triangle"
 const Background = () => (
     <div>
         <Triangle
-            color="secondaryLight"
+            color="primaryDark"
             height={["50vh", "20vh"]}
-            width={["50vw", "50vw"]}
+            width={["50vw", "48.2vw"]}
             invertY
         />
 
         <Triangle
-            color="primaryDark"
+            color="secondary"
             height={["20vh", "40vh"]}
             width={["75vw", "70vw"]}
             invertX
@@ -28,6 +28,14 @@ const Background = () => (
             color="backgroundDark"
             height={["25vh", "20vh"]}
             width={["100vw", "100vw"]}
+        />
+
+        <Triangle
+            color="backgroundDark"
+            height={["25vh", "20vh"]}
+            width={["100vw", "100vw"]}
+            invertX
+            invertY
         />
     </div>
 )
@@ -68,7 +76,8 @@ const About = () => (
                     <Flex
                         justifyContent="center"
                         alignItems="center"
-                        flexWrap="wrap">
+                        flexWrap="wrap"
+                        mb={65}>
                         <Box width={[1, 1, 4 / 6]} px={[1, 2, 4]}>
                             <Fade bottom>
                                 <ReactMarkdown

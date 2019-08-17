@@ -19,11 +19,10 @@ const LinkAnimated = styled.span`
         width: 0;
         bottom: -5px;
         background: ${({
-            selected,
             theme: {
-                colors: {primaryLight, secondaryLight},
+                colors: {secondaryLight},
             },
-        }) => (selected ? secondaryLight : primaryLight)};
+        }) => secondaryLight};
         height: 5px;
         transition-property: width;
         transition-duration: 0.3s;

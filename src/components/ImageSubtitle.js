@@ -1,8 +1,6 @@
-import invert from "invert-color"
 import PropTypes from "prop-types"
 import {Box} from "rebass"
 import styled from "styled-components"
-import colors from "../../colors"
 
 const BORDER_SPACING = "20px"
 const BORDER_RADIUS = "8px"
@@ -28,8 +26,6 @@ const ImageSubtitle = styled(Box)`
   font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;
-  text-shadow: 0px 0px 3px ${props =>
-      invert(props.color ? colors[props.color] || props.color : "#ffffff")};
 
   ${props => props.x}: 0;
   ${props => props.y}: 0;

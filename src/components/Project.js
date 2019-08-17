@@ -154,7 +154,7 @@ const Project = ({
                         </Flex>
                         <ImageSubtitle
                             bg="backgroundDark"
-                            color={typeColor || "primary"}
+                            color="secondary"
                             y="bottom"
                             x="right"
                             round>
