@@ -56,6 +56,7 @@ const Projects = () => {
                         isFork: false
                     ) {
                         nodes {
+                            id
                             name
                             description
                             createdAt
