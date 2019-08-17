@@ -1,21 +1,20 @@
-import React, {Fragment, useEffect} from "react"
-import {createGlobalStyle, ThemeProvider} from "styled-components"
 import PropTypes from "prop-types"
+import React, {Fragment, useEffect} from "react"
+import config from "react-reveal/globals"
 import {ScrollingProvider} from "react-scroll-section"
 import "react-tippy/dist/tippy.css"
-import config from "react-reveal/globals"
+import {createGlobalStyle, ThemeProvider} from "styled-components"
 import colors from "../../colors"
-import Helmet from "./Helmet"
 
 const GlobalStyle = createGlobalStyle`
   *,
   *::after,
-  *::before { 
+  *::before {
     box-sizing: inherit;
     }
 
   body {
-    box-sizing: border-box; 
+    box-sizing: border-box;
     margin: 0;
     font-family: Cabin, 'Open Sans', sans-serif;
     font-display: swap;
@@ -43,10 +42,7 @@ const Layout = ({children}) => {
         <Fragment>
             <GlobalStyle />
             <ThemeProvider theme={{colors}}>
-                <ScrollingProvider>
-                    <Helmet />
-                    {children}
-                </ScrollingProvider>
+                <ScrollingProvider>{children}</ScrollingProvider>
             </ThemeProvider>
         </Fragment>
     )

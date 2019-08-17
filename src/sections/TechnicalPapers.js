@@ -39,8 +39,7 @@ const Background = () => (
     </div>
 )
 
-const fallbackLogo =
-    "https://images.vexels.com/media/users/3/140954/isolated/preview/92c8d4fffeec447a9106b65f8bbf0226-pen-paper-round-icon-by-vexels.png"
+const fallbackLogo = "https://i.imgur.com/JnneNxj.png"
 
 const Projects = () => {
     const {contentfulAbout} = useStaticQuery(graphql`

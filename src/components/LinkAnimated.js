@@ -18,7 +18,12 @@ const LinkAnimated = styled.span`
         right: 0;
         width: 0;
         bottom: -5px;
-        background: ${props => props.theme.colors.secondaryLight};
+        background: ${({
+            selected,
+            theme: {
+                colors: {primaryLight, secondaryLight},
+            },
+        }) => (selected ? secondaryLight : primaryLight)};
         height: 5px;
         transition-property: width;
         transition-duration: 0.3s;

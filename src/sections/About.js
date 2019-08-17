@@ -1,12 +1,12 @@
+import {graphql, StaticQuery} from "gatsby"
 import React from "react"
-import {Box, Image, Flex} from "rebass"
-import {StaticQuery, graphql} from "gatsby"
-import styled from "styled-components"
 import ReactMarkdown from "react-markdown"
 import Fade from "react-reveal/Fade"
+import {Box, Flex, Image} from "rebass"
+import styled from "styled-components"
+import markdownRenderer from "../components/MarkdownRenderer"
 import Section from "../components/Section"
 import Triangle from "../components/Triangle"
-import markdownRenderer from "../components/MarkdownRenderer"
 
 const Background = () => (
     <div>

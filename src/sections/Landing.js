@@ -3,6 +3,7 @@ import React, {Fragment} from "react"
 import {SectionLink} from "react-scroll-section"
 import TextLoop from "react-text-loop"
 import {Box, Flex, Heading, Text} from "rebass"
+import styled from "styled-components"
 import MouseIcon from "../components/MouseIcon"
 import Section from "../components/Section"
 import SocialLink from "../components/SocialLink"
@@ -17,13 +18,13 @@ const Background = () => (
         />
 
         <Triangle
-            color="secondary"
+            color="primaryDark"
             height={["38vh", "80vh"]}
             width={["50vw", "35vw"]}
         />
 
         <Triangle
-            color="primaryDark"
+            color="secondary"
             height={["25vh", "35vh"]}
             width={["75vw", "60vw"]}
             invertX
@@ -38,6 +39,11 @@ const Background = () => (
         />
     </div>
 )
+
+const DescriptionHeading = styled(Heading)`
+    text-transform: uppercase;
+    text-shadow: 0px 0px 3px #000;
+`
 
 const centerHorizontally = {marginRight: "auto", marginLeft: "auto"}
 
@@ -77,14 +83,14 @@ const LandingPage = () => (
                             {`Hello, I'm ${name}!`}
                         </Heading>
 
-                        <Heading
+                        <DescriptionHeading
                             textAlign="center"
                             as="h3"
                             color="primaryLight"
                             fontSize={[3, 4, 5]}
                             mb={[3, 4, 5]}>
                             {description}
-                        </Heading>
+                        </DescriptionHeading>
 
                         <Heading
                             as="h2"

@@ -66,8 +66,7 @@ const ProjectTag = styled.div`
         top: calc(-${CARD_HEIGHT} - 3.5px + (${CARD_HEIGHT} / 4));
     }
 `
-const fallbackImageSrc =
-    "https://freeiconshop.com/wp-content/uploads/edd/code-flat.png"
+const fallbackImageSrc = "https://i.imgur.com/VZHYihW.png"
 
 const Project = ({
     name,
@@ -103,7 +102,6 @@ const Project = ({
                     <span>
                         <Title my={2} pb={1}>
                             {name}
-                            {stars === undefined ? "" : ` (${stars})`}
                         </Title>
                     </span>
                     <Text width={[1]} style={{overflow: "auto"}}>
@@ -156,14 +154,14 @@ const Project = ({
                         </Flex>
                         <ImageSubtitle
                             bg="backgroundDark"
-                            color={typeColor || "#ffffff"}
+                            color={typeColor || "primary"}
                             y="bottom"
                             x="right"
                             round>
                             {type || ""}
                         </ImageSubtitle>
                         <Hide query={MEDIA_QUERY_SMALL}>
-                            <ImageSubtitle bg="backgroundDark" color="#ffffff">
+                            <ImageSubtitle bg="backgroundDark" color="primary">
                                 {publishedDate}
                             </ImageSubtitle>
                         </Hide>
