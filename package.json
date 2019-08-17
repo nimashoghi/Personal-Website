@@ -4,7 +4,7 @@
   "description": "Gatsby v2 starter to create a top notch portfolio!",
   "main": "index.js",
   "scripts": {
-    "deploy": "gatsby build && gh-pages -d public -b master",
+    "deploy": "gatsby clean && gatsby build && gh-pages --dist public --repo https://github.com/nimashoghi/nimashoghi.github.io --branch master",
     "build": "gatsby clean && gatsby build",
     "clean": "gatsby clean",
     "develop": "gatsby clean && gatsby develop --host 0.0.0.0",
