@@ -9,7 +9,7 @@ export const CardContainer = styled.div`
         auto-fill,
         minmax(${props => props.minWidth}, 1fr)
     );
-    justify-items: center;
+    justify-items: stretch;
 
     @media only screen and (max-width: 400px) {
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));

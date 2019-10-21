@@ -1,4 +1,4 @@
-import {graphql, StaticQuery} from "gatsby"
+import {graphql, useStaticQuery} from "gatsby"
 import React from "react"
 import ReactMarkdown from "react-markdown"
 import Fade from "react-reveal/Fade"
@@ -6,39 +6,6 @@ import {Box, Flex, Image} from "rebass"
 import styled from "styled-components"
 import markdownRenderer from "../components/MarkdownRenderer"
 import Section from "../components/Section"
-import Triangle from "../components/Triangle"
-
-const Background = () => (
-    <div>
-        <Triangle
-            color="primaryDark"
-            height={["50vh", "20vh"]}
-            width={["50vw", "48.2vw"]}
-            invertY
-        />
-
-        <Triangle
-            color="secondary"
-            height={["20vh", "40vh"]}
-            width={["75vw", "70vw"]}
-            invertX
-        />
-
-        <Triangle
-            color="backgroundDark"
-            height={["25vh", "20vh"]}
-            width={["100vw", "100vw"]}
-        />
-
-        <Triangle
-            color="backgroundDark"
-            height={["25vh", "20vh"]}
-            width={["100vw", "100vw"]}
-            invertX
-            invertY
-        />
-    </div>
-)
 
 const ProfilePicture = styled(Image)`
     border-radius: 50%;
@@ -49,64 +16,64 @@ const ProfilePicture = styled(Image)`
     }
 `
 
-const About = () => (
-    <Section.Container id="about" Background={Background}>
-        <Section.Header name="About me" icon="🙋‍♂️" label="person" />
-        <StaticQuery
-            query={graphql`
-                query AboutMeQuery {
-                    contentfulAbout {
-                        aboutMe {
-                            childMarkdownRemark {
-                                rawMarkdownBody
-                            }
-                        }
-                        profile {
-                            title
-                            image: resize(width: 450, quality: 100) {
-                                src
-                            }
-                        }
+const About = ({...props}) => {
+    const {
+        contentfulAbout: {aboutMe, profile},
+    } = useStaticQuery(graphql`
+        query AboutMeQuery {
+            contentfulAbout {
+                aboutMe {
+                    childMarkdownRemark {
+                        rawMarkdownBody
                     }
                 }
-            `}
-            render={data => {
-                const {aboutMe, profile} = data.contentfulAbout
-                return (
-                    <Flex
-                        justifyContent="center"
-                        alignItems="center"
-                        flexWrap="wrap"
-                        mb={65}>
-                        <Box width={[1, 1, 4 / 6]} px={[1, 2, 4]}>
-                            <Fade bottom>
-                                <ReactMarkdown
-                                    source={
-                                        aboutMe.childMarkdownRemark
-                                            .rawMarkdownBody
-                                    }
-                                    renderers={markdownRenderer}
-                                />
-                            </Fade>
-                        </Box>
+                profile {
+                    title
+                    image: resize(width: 450, quality: 100) {
+                        src
+                    }
+                }
+            }
+        }
+    `)
 
-                        <Box
-                            width={[1, 1, 2 / 6]}
-                            style={{maxWidth: "300px", margin: "auto"}}>
-                            <Fade right>
-                                <ProfilePicture
-                                    src={profile.image.src}
-                                    alt={profile.title}
-                                    mt={[4, 4, 0]}
-                                    ml={[0, 0, 1]}
-                                />
-                            </Fade>
-                        </Box>
-                    </Flex>
-                )
-            }}
-        />
-    </Section.Container>
-)
+    return (
+        <Section.Container id="about" {...props}>
+            <Section.Header
+                name="About me"
+                icon="🙋‍♂️"
+                label="person"
+                color="secondaryDark"
+            />
+            <Flex
+                justifyContent="center"
+                alignItems="center"
+                flexWrap="wrap"
+                mb={65}>
+                <Box width={[1, 1, 4 / 6]} px={[1, 2, 4]}>
+                    <Fade bottom>
+                        <ReactMarkdown
+                            source={aboutMe.childMarkdownRemark.rawMarkdownBody}
+                            renderers={markdownRenderer}
+                        />
+                    </Fade>
+                </Box>
+
+                <Box
+                    width={[1, 1, 2 / 6]}
+                    style={{maxWidth: "300px", margin: "auto"}}>
+                    <Fade right>
+                        <ProfilePicture
+                            src={profile.image.src}
+                            alt={profile.title}
+                            mt={[4, 4, 0]}
+                            ml={[0, 0, 1]}
+                        />
+                    </Fade>
+                </Box>
+            </Flex>
+        </Section.Container>
+    )
+}
 
 export default About

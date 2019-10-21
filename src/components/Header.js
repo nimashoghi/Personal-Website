@@ -19,6 +19,10 @@ const HeaderContainer = styled(Headroom)`
         background: ${props => props.theme.colors.primaryDark};
     }
 
+    .headroom--unfixed span {
+        color: ${props => props.theme.colors.primaryDark};
+    }
+
     position: absolute;
     width: 100%;
 `
@@ -40,6 +44,18 @@ const formatLinks = allLinks =>
         {links: [], home: null},
     )
 
+const HeaderQuery = graphql`
+    query HeaderQuery {
+        contentfulAbout {
+            favicon {
+                file {
+                    url
+                }
+            }
+        }
+    }
+`
+
 const Header = () => {
     const {
         contentfulAbout: {
@@ -47,17 +63,7 @@ const Header = () => {
                 file: {url},
             },
         },
-    } = useStaticQuery(graphql`
-        query HeaderQuery {
-            contentfulAbout {
-                favicon {
-                    file {
-                        url
-                    }
-                }
-            }
-        }
-    `)
+    } = useStaticQuery(HeaderQuery)
     return (
         <HeaderContainer>
             <Fade top>

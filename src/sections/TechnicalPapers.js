@@ -4,37 +4,10 @@ import Fade from "react-reveal/Fade"
 import {CardContainer} from "../components/Card"
 import Project from "../components/Project"
 import Section from "../components/Section"
-import Triangle from "../components/Triangle"
-
-const Background = () => (
-    <div>
-        <Triangle
-            color="secondary"
-            height={["80vh", "80vh"]}
-            width={["100vw", "100vw"]}
-            invertX
-        />
-
-        <Triangle
-            color="background"
-            height={["50vh", "20vh"]}
-            width={["50vw", "50vw"]}
-            invertX
-        />
-
-        <Triangle
-            color="primaryDark"
-            height={["25vh", "40vh"]}
-            width={["75vw", "100vw"]}
-            invertX
-            invertY
-        />
-    </div>
-)
 
 const fallbackLogo = "https://i.imgur.com/JnneNxj.png"
 
-const Projects = () => {
+const Projects = ({...props}) => {
     const {contentfulAbout} = useStaticQuery(graphql`
         query TechnicalPapersQuery {
             contentfulAbout {
@@ -67,11 +40,12 @@ const Projects = () => {
     )
 
     return (
-        <Section.Container id="technical-papers" Background={Background}>
+        <Section.Container id="technical-papers" {...props}>
             <Section.Header
                 name="Technical Papers"
                 icon="📝"
                 label="notebook"
+                color="secondaryLight"
             />
             <CardContainer minWidth="350px">
                 {technicalPapers.map((p, i) => (
