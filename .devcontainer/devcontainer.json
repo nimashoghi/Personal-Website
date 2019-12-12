@@ -10,7 +10,6 @@
         // docker fowrarding
         "-v",
         "//wsl$/Ubuntu/var/run/docker.sock:/var/run/docker.sock",
-
         // env file
         "--env-file",
         ".env"
